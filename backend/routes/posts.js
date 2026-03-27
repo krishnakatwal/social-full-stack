@@ -35,6 +35,7 @@ router.get("/", async (req, res) => {
       // turn the author (which is an id) into the user document for that author/id
       // the second argument 'username' is the field in the user document we want to keep
       .populate("author", "username");
+      console.log(posts)
     res.status(200).json(posts);
   } catch (error) {
     console.log(err.message);

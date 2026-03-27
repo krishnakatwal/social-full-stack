@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { postClient } from "../clients/api";
 import Post from "../components/Post";
 
@@ -14,10 +13,13 @@ function Feed() {
       try {
         // get our posts from db
         const { data } = await postClient.get("/");
-        // console.log(response.data)
+        console.log(data)
 
         // save that in component's state
         setPosts(data);
+        //making changes here 
+        // setPosts(data.posts);
+
       } catch (error) {
         console.log(error.response.data);
       }
@@ -68,9 +70,9 @@ function Feed() {
         <button>Submit</button>
       </form>
 
-     
+    {/* key should be there in map and filter functions at the top level element*/}
       {posts.map((post) => (
-        <Post key={post._id} post={post} />
+        <Post post={post} key={post._id} />
       ))}
     </div>
   );

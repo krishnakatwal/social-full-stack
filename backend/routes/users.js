@@ -45,16 +45,19 @@ router.post("/login", async (req, res) => {
   try {
     //find the user
     const user = await User.findOne({ email: req.body.email });
+
     //check if the user exists
     if (!user) {
      return  res.status(400).json({ message: "Incorrect email and password" });
     }
+
     //check the password
     const correctPassword = await bcrypt.compare(req.body.password,user.password);
 
     if (!correctPassword) {
       return res.status(400).json({ message: "Incorrect email or password" });
     }
+    
     //create a token
     const payload = {
       username: user.username,
